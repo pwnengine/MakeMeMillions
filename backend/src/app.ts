@@ -1,5 +1,6 @@
 import { chromium } from 'playwright'
-import { login } from './helpers/login.js'
+import { login } from './helpers/fb_login.js'
+import { post_listing } from './helpers/fb_post.js'
 
 async function main() {
   const browser = await chromium.launch({
@@ -11,7 +12,9 @@ async function main() {
   
   
   await login(page);
-  
+  await post_listing({
+    page,
+  });
 
   await context.close();
   await browser.close();

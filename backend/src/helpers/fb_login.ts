@@ -17,7 +17,7 @@ const captcha_detection = async (page: Page): Promise<boolean> => {
 
 const error_detection = async (page: Page): Promise<boolean> => {
   try {
-    await page.locator("css=div[id='error_box']").waitFor({
+    await page.locator('css=div[id="error_box"]').waitFor({
       state: 'attached', 
       timeout: 10000,
     });  
