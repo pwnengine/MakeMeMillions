@@ -1,5 +1,5 @@
 import { Locator, Page } from 'playwright'
-import { generate_random } from './random.js'
+import { generate_random, random_timeout } from '../random.js'
 import { config } from 'dotenv'
 
 const captcha_detection = async (page: Page): Promise<boolean> => {
@@ -33,15 +33,15 @@ export const login = async (page: Page): Promise<number> => {
 
   config();
 
-  await page.waitForTimeout(generate_random(3000, 5000));
+  await random_timeout(page);
   const email = page.getByPlaceholder('Email or phone number');
   await email.fill(`${process.env.AUTH_EMAIL}`);
 
-  await page.waitForTimeout(generate_random(3000, 5000));
+  await random_timeout(page);
   const pass = page.getByPlaceholder('Password');
   await pass.fill(`${process.env.AUTH_PASS}`);
 
-  page.waitForTimeout(generate_random(3000, 5000));
+  await random_timeout(page);
   page.locator("css=button[name='login']").click();
 
   if(captcha_detection(page)) {

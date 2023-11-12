@@ -1,23 +1,30 @@
-import { chromium } from 'playwright'
-import { login } from './helpers/fb_login.js'
-import { post_listing } from './helpers/fb_post.js'
+import { fb_start } from './helpers/marketplace/fb_start.js'
+import express from 'express'
+import { config } from 'dotenv'
+import { cl_start } from './helpers/craigslist/cl_start.js'
 
-async function main() {
-  const browser = await chromium.launch({
-    headless: false
+config();
+
+// on interval let's check craiglist for good free stuff
+cl_start();
+setInterval(() => {
+  cl_start();
+}, 147483647); // run bot about every 2 days
+
+/*
+const app = express();
+
+app.get('/api', (req, res) => {
+
+  check++;
+
+  res.json({
+    yo: 'hello',
   });
+});
 
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  
-  
-  await login(page);
-  await post_listing({
-    page,
-  });
+app.listen(8080, () => {
+  console.log('running on port 8080');
+});
 
-  await context.close();
-  await browser.close();
-};
-
-main();
+*/
