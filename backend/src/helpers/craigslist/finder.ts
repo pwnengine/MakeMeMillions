@@ -1,6 +1,7 @@
 import { Page } from 'playwright'
 import { random_timeout } from '../random.js'
 import { ChatGPTAPI } from 'chatgpt'
+import { c_listings } from '../listing_class.js'
 
 export const check_listings = async (page: Page) => {
   /*
@@ -8,52 +9,54 @@ export const check_listings = async (page: Page) => {
     apiKey: process.env.OPENAI_API_KEY,
   });
 */
+  const listings = new c_listings;
+
+  //const img_urls = [];
+  //const titles = [];
+  //const descriptions = [];
+
   await page.goto(`${process.env.cl_url}search/zip#search=1~gallery~0~0`, {
     waitUntil: 'networkidle',
   });
 
   // now we got all of the first page listing (120 total)
-  const elements = await page.$$('.cl-gallery');
+  await random_timeout(page);
+  const elements_cnt = (await page.$$('.cl-gallery')).length;
 
   // should probably only check half of the total
-  for(let q: number = 0; q < ((elements.length - 110) - 1); ++q) {
-    //const inner_a_element = await elements[q].$('.main');
-    //console.log(await inner_a_element.innerHTML());
+  for(let q: number = 0; q < (elements_cnt - 110); ++q) {
+    await random_timeout(page);
+    const elements = await page.$$('.cl-gallery');
 
-    const inner_elements = await elements[q].$('.main');
-    const inner_elements_inner = await inner_elements.innerHTML();
-    const inner_tags_array = inner_elements_inner.split('>');
-    //console.log(imgs_array);
+    try {
+      await random_timeout(page);
+      await elements[q].click();
 
-    if(inner_tags_array != undefined) {
-      for(let qq: number = 0; qq < inner_tags_array.length - 1; ++qq) {
-        //console.log(inner_tags_array[qq]);
+      //await random_timeout(page);
+      const img_tag_outer = await page.$('.slide');
+      const img_tag_inner = await img_tag_outer.innerHTML()
+      //img_urls.push(img_tag_inner.split('"')[1]);
+      listings.add_img_url = img_tag_inner.split('"')[1];
 
-  
+      //await random_timeout(page);
+      //titles.push(await page.locator('span[id="titletextonly"]').innerText());
+      listings.add_title = await page.locator('span[id=titletextonly]').innerText();
 
+      await random_timeout(page);
+      //descriptions.push(await page.locator('section[id="postingbody"]').innerText());
+      listings.add_description = await page.locator('section[id="postingbody"]').innerText();
 
-        if(inner_tags_array[qq].includes('img')) {
-          //console.log('this is an img tag: ' + inner_tags_array[qq]);
-
-          const img_tags = inner_tags_array[qq].split('"');
-
-          const alt = img_tags[1];
-          const img = img_tags[3];
-
-          if(alt != undefined && img != undefined) {
-            console.log('alt: ' + alt);
-            console.log('img: ' + img);
-          }
-          
-          
-          
-          //const res = await api.sendMessage()
-        }
-      }
+      await page.goto(`${process.env.cl_url}search/zip#search=1~gallery~0~0`, {
+        waitUntil: 'networkidle',
+      });
+    } catch(err) {
+      console.log(err);
     }
-    
-
   }
 
-  console.log(elements.length);
+  console.log(listings.get_img_urls);
+  console.log(listings.get_titles);
+  console.log(listings.get_descriptions);
+
+  return listings;
 };
