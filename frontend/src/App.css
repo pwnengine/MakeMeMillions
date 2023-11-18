@@ -7,22 +7,98 @@
 
 .marketplace-post-container-outer {
   height: 800px;
-  width: 690px;
+  width: 32%;
+  min-width: 490px;
   border-radius: 20px;
   position: absolute;
-  top: 5px;
-  left: 10%;
+  top: 25px;
+  left: 20%;
 
   text-align: left;
   overflow-y: hidden;
+
+  background-color: #ffff;
 }
 
 .marketplace-post-container-inner {
-  height: 90%;
-  overflow-y: scroll;
+  min-width: 340px;
+  height: 100%;
+  overflow-y: auto;
   scrollbar-width: thin;
-  display: grid;
-  grid-template-columns: 220px 220px 220px;
+  
+  background-color: #ffff;
+  
+  padding: 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+
+  gap: 1em;
+}
+
+.marketplace-post-input {
+  
+  height: 25px;
+  border: solid;
+  border-width: 1px;
+  
+  border-radius: 5px;
+  width: 95%;
+  min-width: 1px;
+  padding: 10px;
+
+  align-self: flex-start;
+  flex-shrink: 5;
+}
+.marketplace-post-input:hover {
+  border-width: 2px;
+}
+
+.marketplace-post-input-large {
+  
+  height: 85px;
+  border: solid;
+  border-width: 1px;
+  
+  border-radius: 5px;
+  width: 95%;
+  min-width: 1px;
+  max-width: 95%;
+  padding: 10px;
+
+  align-self: flex-start;
+  flex-shrink: 5;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.marketplace-post-input-large:hover {
+  border-width: 2px;
+}
+
+.post-listing-container {
+  
+  /*
+  background-color: #ffff;
+  position: fixed;
+  top: 85%;
+  left: 20%;
+  height: 80px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  min-width: 350px;
+  */
+}
+.post-listing {
+  /*
+  margin-left: 50px;
+  width: 80%;
+  */
+
+  width: 100%;
+  font-weight: bold;
+}
+.post-listing:hover {
+  background-color: #1778f2;
 }
 
 
@@ -32,16 +108,18 @@
   width: 690px;
   border-radius: 20px;
   position: absolute;
-  top: 5px;
-  right: 10%;
+  top: 25px;
+  right: 5%;
 
   text-align: left;
   overflow-y: hidden;
+
+  background-color: #ffff;
 }
 
 .craigslist-posts-container-inner {
   height: 90%;
-  overflow-y: scroll;
+  overflow-y: auto;
   scrollbar-width: thin;
   display: grid;
   grid-template-columns: 220px 220px 220px;
@@ -58,6 +136,8 @@
 
 
   margin-top: 5px;
+
+  background-color: #ffff;
 }
 
 .craigslist-post-img {
