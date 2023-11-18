@@ -1,0 +1,73 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.marketplace-post-container-outer {
+  height: 800px;
+  width: 690px;
+  border-radius: 20px;
+  position: absolute;
+  top: 5px;
+  left: 10%;
+
+  text-align: left;
+  overflow-y: hidden;
+}
+
+.marketplace-post-container-inner {
+  height: 90%;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  display: grid;
+  grid-template-columns: 220px 220px 220px;
+}
+
+
+
+.craigslist-posts-container-outer {
+  height: 800px;
+  width: 690px;
+  border-radius: 20px;
+  position: absolute;
+  top: 5px;
+  right: 10%;
+
+  text-align: left;
+  overflow-y: hidden;
+}
+
+.craigslist-posts-container-inner {
+  height: 90%;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  display: grid;
+  grid-template-columns: 220px 220px 220px;
+}
+
+.craigslist-post {
+  margin: 20px;
+  border-radius: 5px;
+
+  width: 200px;
+  height: 200px;
+  background-color: #ecf1ff;
+  overflow: hidden;
+
+
+  margin-top: 5px;
+}
+
+.craigslist-post-img {
+  display: block;
+}
+
+.craigslist-post-title {
+  font-weight: bold;
+  margin-left: 10px;
+  margin-bottom: 1px;
+  margin-top: -5px;
+}
+

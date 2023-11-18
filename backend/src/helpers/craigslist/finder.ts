@@ -20,7 +20,7 @@ export const check_listings = async (page: Page): Promise<c_listing[]> => {
   const elements_cnt = (await page.$$('.cl-gallery')).length;
 
   // should probably only check half of the total
-  for(let q: number = 0; q < (elements_cnt - 119); ++q) {
+  for(let q: number = 0; q < (elements_cnt - 110); ++q) {
     let img_url: string;
     let title: string;
     let description: string;
@@ -46,6 +46,11 @@ export const check_listings = async (page: Page): Promise<c_listing[]> => {
       img_url = img_tag_inner.split('"')[1];
     } catch(err) {
       console.log('error gettings image url inside of listing: ' + err);
+
+      await page.goto(`${process.env.cl_url}search/zip#search=1~gallery~0~0`, {
+        waitUntil: 'networkidle',
+      });
+      continue; // because I only want the posts with images
     }
 
     // try to get listing title

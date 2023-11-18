@@ -11,10 +11,16 @@ let cl_listings: c_listing[] = await cl_start();
 // on interval let's check craiglist for good free stuff
 setInterval(async () => {
   cl_listings = await cl_start();
-}, 60000); // run bot about every 2 days 147483647
+}, 147483647); // run bot about every 2 days 147483647
 
 function main() {
   const app = express();
+
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 
   app.get('/api/v1/cl/', async (req, res) => {
     if(req.query.check === 'true') {
