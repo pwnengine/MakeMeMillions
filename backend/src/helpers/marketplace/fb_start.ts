@@ -1,8 +1,9 @@
 import { chromium } from 'playwright'
 import { login } from './fb_login.js'
 import { post_listing } from './fb_post.js'
+import { c_listing } from '../listing_class.js'
 
-export const fb_start = async () => {
+export const fb_start = async (fb_email: string, fb_pass, price: string, listing: c_listing) => {
   const browser = await chromium.launch({
     headless: false,
   });
@@ -10,9 +11,9 @@ export const fb_start = async () => {
   const context = await browser.newContext();
   const page = await context.newPage();
 
-  await login(page);
+  await login(page, fb_email, fb_pass);
   await post_listing({
-    page,
+    page, listing, price
   });
 
   await context.close();

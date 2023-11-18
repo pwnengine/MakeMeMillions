@@ -1,14 +1,17 @@
 import { FileChooser, Page } from 'playwright'
 import { generate_random, random_timeout } from '../random.js'
 import { readFile } from 'fs'
+import { c_listing } from '../listing_class.js'
 
 interface i_params {
   page: Page;
+  listing: c_listing;
+  price: string;
   type?: 'item' | 'vehicle' | 'rental';
   condition?: 'New' | 'Used - Like New' | 'Used - Good' | 'Used - Fair';
 }
 
-export const post_listing = async ({ page, type='item', condition='Used - Fair' }: i_params) => {
+export const post_listing = async ({ page, price, listing, type='item', condition='Used - Fair' }: i_params) => {
   await page.goto(`https://www.facebook.com/marketplace/create/${type}`, {
     waitUntil: 'networkidle',
   });
@@ -23,10 +26,10 @@ export const post_listing = async ({ page, type='item', condition='Used - Fair' 
   await file_chooser.setFiles('./dressertest.png');
 
   await random_timeout(page);
-  page.locator('label[aria-label="Title"] input').fill('Dresser');
+  page.locator('label[aria-label="Title"] input').fill(listing.get_title);
 
   await random_timeout(page);
-  page.locator('label[aria-label="Price"] input').fill('420');
+  page.locator('label[aria-label="Price"] input').fill(price);
 
   await random_timeout(page);
 	page.locator('label[aria-label="Category"] input').fill('Dressers');

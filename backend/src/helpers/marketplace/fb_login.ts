@@ -1,6 +1,5 @@
 import { Locator, Page } from 'playwright'
 import { generate_random, random_timeout } from '../random.js'
-import { config } from 'dotenv'
 
 const captcha_detection = async (page: Page): Promise<boolean> => {
   try {
@@ -28,18 +27,16 @@ const error_detection = async (page: Page): Promise<boolean> => {
   return true;
 };
 
-export const login = async (page: Page): Promise<number> => {
+export const login = async (page: Page, fb_email: string, fb_pass: string): Promise<number> => {
   await page.goto('https://www.facebook.com/', { waitUntil: 'networkidle' });
-
-  config();
 
   await random_timeout(page);
   const email = page.getByPlaceholder('Email or phone number');
-  await email.fill(`${process.env.AUTH_EMAIL}`);
+  await email.fill(fb_email);
 
   await random_timeout(page);
   const pass = page.getByPlaceholder('Password');
-  await pass.fill(`${process.env.AUTH_PASS}`);
+  await pass.fill(fb_pass);
 
   await random_timeout(page);
   page.locator("css=button[name='login']").click();

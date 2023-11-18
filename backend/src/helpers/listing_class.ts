@@ -4,28 +4,28 @@ export interface i_data {
   description: string;
 }
 
-export class c_listings {
-  img_urls: string[] = [];
-  titles: string[] = [];
-  descriptions: string[] = [];
+export class c_listing {
+  private img_url: string = '';
+  private title: string = '';
+  private description: string = '';
 
-  get get_img_urls(): string[] {
-    return this.img_urls;
+  get get_img_url(): string {
+    return this.img_url;
   }
-  get get_titles(): string[] {
-    return this.titles;
+  get get_title(): string {
+    return this.title;
   }
-  get get_descriptions(): string[] {
-    return this.descriptions;
+  get get_description(): string {
+    return this.description;
   }
 
-  set add_img_url(img_url: string) {
-    this.img_urls.push(img_url);
+  set set_img_url(img_url: string) {
+    this.img_url = img_url;
   }
-  set add_title(title: string) {
-    this.titles.push(title);
+  set set_title(title: string) {
+    this.title = title;
   }
-  set add_description(description: string) {
-    this.descriptions.push(description);
+  set set_description(description: string) {
+    this.description = description;
   }
 }
