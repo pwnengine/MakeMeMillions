@@ -8,6 +8,7 @@ export class c_listing {
   private img_url: string = '';
   private title: string = '';
   private description: string = '';
+  //private condition: string 
 
   get get_img_url(): string {
     return this.img_url;

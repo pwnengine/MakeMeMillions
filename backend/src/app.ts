@@ -41,7 +41,7 @@ function main() {
     listing_to_post.set_title = query.item_title;
     listing_to_post.set_description = query.item_description;
 
-    fb_start(query.email, query.pass, query.item_price, query.item_condition, query.item_type, listing_to_post).then(() => {
+    fb_start(query.email, query.pass, query.item_price, query.item_type, query.item_condition, listing_to_post).then(() => {
       res.json({
         hello: 'hello',
       });

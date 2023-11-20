@@ -16,7 +16,6 @@ export const post_listing = async ({ page, price, listing, type='item', conditio
     waitUntil: 'networkidle',
   });
 
-
   const file_chooser_promise = page.waitForEvent('filechooser');
 
   await random_timeout(page);
@@ -35,13 +34,19 @@ export const post_listing = async ({ page, price, listing, type='item', conditio
 	page.locator('label[aria-label="Category"] input').fill(type);
 
   await random_timeout(page);
+  page.keyboard.press('ArrowDown');
+  await random_timeout(page);
   page.keyboard.press('Enter');
+
 
   await random_timeout(page);
 	page.locator('label[aria-label="Condition"]').click();
 
   await random_timeout(page);
   page.getByText(condition).click();
+
+  await random_timeout(page);
+  page.locator('textarea').fill(listing.get_description);
 
 
 

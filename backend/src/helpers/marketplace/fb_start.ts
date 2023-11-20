@@ -13,7 +13,7 @@ export const fb_start = async (fb_email: string, fb_pass, price: string, type: s
 
   await login(page, fb_email, fb_pass);
   await post_listing({
-    page, listing, price, condition, type
+    page: page, listing: listing, price: price, type: type, condition: condition
   });
 
   await context.close();

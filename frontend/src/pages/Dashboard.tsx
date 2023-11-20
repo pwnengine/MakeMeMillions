@@ -63,12 +63,12 @@ const Dashboard = () => {
               <select className="marketplace-post-type" {...register('item-type')}>
                 <option value="Video Game Consoles">Video Game Consoles</option>
                 <option value="Cell Phones">Cell Phones</option>
-                <option>Other Cell Phones & Accessories</option>
-                <option>Cables & Power Cords</option>
-                <option>Desktop Computers</option>
-                <option>Laptops</option>
-                <option>Laptop Parts & Accessories</option>
-                <option>Antique & Collectible Toys</option>
+                <option value="Other Cell Phones & Accessories">Other Cell Phones & Accessories</option>
+                <option value="Cables & Power Cords">Cables & Power Cords</option>
+                <option value="Desktop Computers">Desktop Computers</option>
+                <option value="Laptops">Laptops</option>
+                <option value="Laptop Parts & Accessories">Laptop Parts & Accessories</option>
+                <option value="Antique & Collectible Toys">Antique & Collectible Toys</option>
                 <option>Antique & Collectible Stamps</option>
                 <option>Beds & Bed Frames</option>
                 <option>Benches</option>
