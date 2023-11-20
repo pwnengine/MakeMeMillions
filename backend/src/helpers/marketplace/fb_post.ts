@@ -1,7 +1,9 @@
 import { FileChooser, Page } from 'playwright'
-import { generate_random, random_timeout } from '../random.js'
+import { generate_random, random_timeout, random_string } from '../random.js'
 import { readFile } from 'fs'
 import { c_listing } from '../listing_class.js'
+import http from 'https'
+import fs from 'fs'
 
 interface i_params {
   page: Page;
@@ -11,7 +13,24 @@ interface i_params {
   condition?: string;
 }
 
+const img_dl = (img_url: string): string => {
+  const dest: string = random_string(10) + '.png';
+  const file: fs.WriteStream = fs.createWriteStream(dest);
+  const req = http.get(img_url, (res) => {
+    res.pipe(file);
+    file.on('finish', () => {
+      file.close();
+    });
+  }).on('error', (err) => {
+    fs.unlink(dest, (err) => console.log(err));
+  });
+
+  return dest;
+};
+
 export const post_listing = async ({ page, price, listing, type='item', condition="Used - Good"}: i_params) => {
+  const img_file: string = img_dl(listing.get_img_url);
+
   await page.goto(`https://www.facebook.com/marketplace/create/$item`, {
     waitUntil: 'networkidle',
   });
@@ -22,7 +41,7 @@ export const post_listing = async ({ page, price, listing, type='item', conditio
   page.locator('div[role="button"]:has-text("Add Photos")').click();
 
   const file_chooser = await file_chooser_promise;
-  await file_chooser.setFiles('./dressertest.png');
+  await file_chooser.setFiles(`./${img_file}`);
 
   await random_timeout(page);
   page.locator('label[aria-label="Title"] input').fill(listing.get_title);
