@@ -7,12 +7,12 @@ interface i_params {
   page: Page;
   listing: c_listing;
   price: string;
-  type?: 'item' | 'vehicle' | 'rental';
-  condition?: 'New' | 'Used - Like New' | 'Used - Good' | 'Used - Fair';
+  type: string;
+  condition?: string;
 }
 
-export const post_listing = async ({ page, price, listing, type='item', condition='Used - Fair' }: i_params) => {
-  await page.goto(`https://www.facebook.com/marketplace/create/${type}`, {
+export const post_listing = async ({ page, price, listing, type='item', condition="Used - Good"}: i_params) => {
+  await page.goto(`https://www.facebook.com/marketplace/create/$item`, {
     waitUntil: 'networkidle',
   });
 
@@ -32,7 +32,7 @@ export const post_listing = async ({ page, price, listing, type='item', conditio
   page.locator('label[aria-label="Price"] input').fill(price);
 
   await random_timeout(page);
-	page.locator('label[aria-label="Category"] input').fill('Dressers');
+	page.locator('label[aria-label="Category"] input').fill(type);
 
   await random_timeout(page);
   page.keyboard.press('Enter');

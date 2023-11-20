@@ -35,15 +35,17 @@ function main() {
 
   app.get('/api/v1/fb/', (req, res) => {
     const query = req.query;
-    fb_start(query.email, query.pass, query.price, cl_listings[query.index]);
-    res.json({
-      listing: {
-        img_url: cl_listings[query.listing].get_img_url,
-        title: cl_listings[query.listing].get_title,
-        description: cl_listings[query.listing].get_description,
-      },
-    });
+    console.log(query);
+    const listing_to_post = new c_listing;
+    listing_to_post.set_img_url = query.img_url;
+    listing_to_post.set_title = query.item_title;
+    listing_to_post.set_description = query.item_description;
 
+    fb_start(query.email, query.pass, query.item_price, query.item_condition, query.item_type, listing_to_post).then(() => {
+      res.json({
+        hello: 'hello',
+      });
+    });    
   });
 
   app.listen(8080, () => {

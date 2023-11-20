@@ -20,7 +20,7 @@ export const check_listings = async (page: Page): Promise<c_listing[]> => {
   const elements_cnt = (await page.$$('.cl-gallery')).length;
 
   // should probably only check half of the total
-  for(let q: number = 0; q < (elements_cnt - 110); ++q) {
+  for(let q: number = 0; q < (elements_cnt - 100); ++q) {
     let img_url: string;
     let title: string;
     let description: string;

@@ -1,15 +1,16 @@
 interface props {
   heading: string;
+  class_name: string;
   children: JSX.Element;
 }
 
-const ShrinkableContainer = ({heading, children}: props) => {
+const ShrinkableContainer = ({heading, class_name, children}: props) => {
   return (
-    <div className="craigslist-posts-container-outer">
+    <div className={`${class_name}-outer`}>
       <h3 style={{marginLeft: '20px'}}>{heading}</h3>
 
 
-      <div className="craigslist-posts-container-inner">
+      <div className={`${class_name}-inner`}>
 
         {children}
         
