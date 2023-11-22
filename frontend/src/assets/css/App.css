@@ -167,6 +167,14 @@
   background-color: #1778f2;
 }
 
+.update-cl-posts {
+  position: absolute;
+  top: 15px;
+  left: 550px;
+  background-color:#1778f2;
+  font-weight: bold;
+  color: #ffff;
+}
 
 
 .craigslist-posts-container-outer {

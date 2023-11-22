@@ -27,12 +27,10 @@ export const check_listings = async (page: Page): Promise<c_listing[]> => {
 
 
     // get all of the listings
-    await random_timeout(page);
     const elements = await page.$$('.cl-gallery');
 
     // try to click on a listing
     try {
-      //await random_timeout(page);
       await elements[q].click();
     } catch(err) {
       console.log('error clicking on listing: ' + err);
@@ -40,7 +38,6 @@ export const check_listings = async (page: Page): Promise<c_listing[]> => {
 
     // try to get listing image url
     try {
-      //await random_timeout(page);
       const img_tag_outer = await page.$('.slide');
       const img_tag_inner = await img_tag_outer.innerHTML()
       img_url = img_tag_inner.split('"')[1];
@@ -55,7 +52,6 @@ export const check_listings = async (page: Page): Promise<c_listing[]> => {
 
     // try to get listing title
     try {
-      //await random_timeout(page);
       title = await page.locator('span[id=titletextonly]').innerText();
     } catch(err) {
       console.log('error locating listing title: ' + err);
@@ -63,7 +59,6 @@ export const check_listings = async (page: Page): Promise<c_listing[]> => {
 
     // try to get listing description
     try {
-      //await random_timeout(page);
       description = await page.locator('section[id="postingbody"]').innerText();
     } catch(err) {
       console.log('error locating description: ' + err);

@@ -1,14 +1,23 @@
 import Posts from '../components/Posts';
 import ShrinkableContainer from '../components/ShrinkableContainer';
-import { useQueryCraigslist } from '../hooks/useQueryCraigslist'
 import { useState } from 'react'
 import { useForm, FieldValues } from 'react-hook-form'
-//import { c_listing } from '../listing_class'
+import { c_listing } from '../listing_class';
+import { useQueryHook } from '../hooks/useQueryHook'
 import Axios from 'axios'
 
-const Dashboard = () => {
-  const [data, isLoading, refetch] = useQueryCraigslist();
+interface i_listings {
+  img_url: string;
+  title: string;
+  description: string;
+}
 
+interface i_cl_query_data {
+  listings_length: number;
+  listings: i_listings[];
+}
+
+const Dashboard = () => {
   const [ curr_img_url, set_curr_img_url ] = useState<string>('');
   const [ curr_title, set_curr_title ] = useState<string>('');
   const [ curr_description, set_curr_description ] = useState<string>('');
@@ -19,22 +28,27 @@ const Dashboard = () => {
   const [ fb_email, set_fb_email ] = useState<string>(import.meta.env.VITE_FB_EMAIL);
   const [ fb_pass, set_fb_pass ] = useState<string>(import.meta.env.VITE_FB_PASS);
 
-
-
   const { handleSubmit, register } = useForm();
-
+  
+  const [data, isLoading, refetch] = useQueryHook<i_cl_query_data>('http://localhost:8080/api/v1/cl/');
   if(isLoading) {
     return (
-      <h1>Loading...</h1>
+      <h2 style={{position: 'absolute', top: '40%', left: '50%', transform: 'translate(-40%, -50%)'}}>Loading... <br/> We are gathering cragislist posts for you,<br/> please be patient.</h2>
     )
   }
 
-  console.log(data?.[0].get_title);
+  const listings: c_listing[] = []; 
 
+  for(let q: number = 0; q < data.listings_length; ++q) {
+    const listing: c_listing = new c_listing;
+    listing.set_img_url = data.listings[q].img_url;
+    listing.set_title = data.listings[q].title;
+    listing.set_description = data.listings[q].description;
+  
+    listings.push(listing);
+  }
 
   const handle_post = (data: FieldValues) => {
-   
-
     const item_title = data['item-title'];
     const item_description = data['item-description'];
     const item_type = data['item-type'];
@@ -99,16 +113,16 @@ const Dashboard = () => {
       </div>
 
       <ShrinkableContainer heading="Free Craigslist Listings" class_name="craigslist-posts-container">
-        <Posts on_click={(index) => {
+        <Posts handle_update={refetch} on_click={(index) => {
             set_post_index(index);
-            set_curr_img_url(String(data?.[index].get_img_url));
-            set_curr_title(String(data?.[index].get_title));
-            set_curr_description(String(data?.[index].get_description));
+            set_curr_img_url(String(listings?.[index].get_img_url));
+            set_curr_title(String(listings?.[index].get_title));
+            set_curr_description(String(listings?.[index].get_description));
             set_update_item_values(true);
             setTimeout(() => {
               set_update_item_values(false);
             }, 1000);
-        }} data={data} />
+        }} data={listings} />
       </ShrinkableContainer>
 
      

@@ -3,11 +3,16 @@ import { c_listing } from '../listing_class'
 interface props {
   data: c_listing[] | undefined;
   on_click: (index: number) => void;
+  handle_update: () => void;
 }
 
 const Posts = (p: props) => {
   return (
     <>
+      <button className="update-cl-posts" onClick={() => {
+        console.log('hleloo');
+        p.handle_update()
+      }}>Update</button>
       {
         p.data?.map((val, index) => {
           return (
