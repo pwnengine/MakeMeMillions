@@ -11,7 +11,7 @@ export const check_listings = async (page: Page): Promise<c_listing[]> => {
 */
   const listings: c_listing[] = [];
 
-  await page.goto(`${process.env.cl_url}search/zip#search=1~gallery~0~0`, {
+  await page.goto(`${process.env.CL_URL}search/zip#search=1~gallery~0~0`, {
     waitUntil: 'networkidle',
   });
 
@@ -44,7 +44,7 @@ export const check_listings = async (page: Page): Promise<c_listing[]> => {
     } catch(err) {
       console.log('error gettings image url inside of listing: ' + err);
 
-      await page.goto(`${process.env.cl_url}search/zip#search=1~gallery~0~0`, {
+      await page.goto(`${process.env.CL_URL}search/zip#search=1~gallery~0~0`, {
         waitUntil: 'networkidle',
       });
       continue; // because I only want the posts with images
@@ -65,7 +65,7 @@ export const check_listings = async (page: Page): Promise<c_listing[]> => {
     }
 
     // go back to main page to reset
-    await page.goto(`${process.env.cl_url}search/zip#search=1~gallery~0~0`, {
+    await page.goto(`${process.env.CL_URL}search/zip#search=1~gallery~0~0`, {
       waitUntil: 'networkidle',
     });
 

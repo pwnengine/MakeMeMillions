@@ -17,7 +17,7 @@ interface i_cl_query_data {
   listings: i_listings[];
 }
 
-const Dashboard = () => {
+const Dashboard = () => { 
   const [ curr_img_url, set_curr_img_url ] = useState<string>('');
   const [ curr_title, set_curr_title ] = useState<string>('');
   const [ curr_description, set_curr_description ] = useState<string>('');
@@ -112,7 +112,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <ShrinkableContainer heading="Free Craigslist Listings" class_name="craigslist-posts-container">
+      <ShrinkableContainer heading="Free Craigslist Listings" class_name="craigslist-posts-container" starting_width={860} min_width_before_shrink_start={800} callapse_width={200}>
         <Posts handle_update={refetch} on_click={(index) => {
             set_post_index(index);
             set_curr_img_url(String(listings?.[index].get_img_url));
