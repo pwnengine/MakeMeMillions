@@ -112,7 +112,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <ShrinkableContainer heading="Free Craigslist Listings" class_name="craigslist-posts-container" starting_width={860} min_width_before_shrink_start={800} callapse_width={200}>
+      <ShrinkableContainer heading="Free Craigslist Listings" class_name="craigslist-posts-container" container_width={690} min_browser_width_before_shrink={1378} callapse_width={200}>
         <Posts handle_update={refetch} on_click={(index) => {
             set_post_index(index);
             set_curr_img_url(String(listings?.[index].get_img_url));
