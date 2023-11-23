@@ -83,15 +83,15 @@ const Dashboard = () => {
                 <option value="Laptops">Laptops</option>
                 <option value="Laptop Parts & Accessories">Laptop Parts & Accessories</option>
                 <option value="Antique & Collectible Toys">Antique & Collectible Toys</option>
-                <option>Antique & Collectible Stamps</option>
-                <option>Beds & Bed Frames</option>
-                <option>Benches</option>
-                <option>Coffee Tables</option>
-                <option>Dressers</option>
-                <option>Mattresses</option>
-                <option>Sofas, Loveseats & Sectional</option>
-                <option>TV Stands & Entertainment Centers</option>
-                <option>Miscellaneous</option>
+                <option value="Antique & Collectible Stamps">Antique & Collectible Stamps</option>
+                <option value="Beds & Bed Frames">Beds & Bed Frames</option>
+                <option value="Benches">Benches</option>
+                <option value="Coffee Tables">Coffee Tables</option>
+                <option value="Dressers">Dressers</option>
+                <option value="Mattresses">Mattresses</option>
+                <option value="Sofas, Loveseats & Sectional">Sofas, Loveseats & Sectional</option>
+                <option value="TV Stands & Entertainment Centers">TV Stands & Entertainment Centers</option>
+                <option value="Miscellaneous">Miscellaneous</option>
               </select>
 
               <select className="marketplace-post-condition" {...register('item-condition')}>

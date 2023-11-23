@@ -67,6 +67,12 @@ export const post_listing = async ({ page, price, listing, type='item', conditio
   await random_timeout(page);
   page.locator('textarea').fill(listing.get_description);
 
+  await random_timeout(page);
+  page.getByText('Next').click();
+
+  await random_timeout(page);
+  page.locator('div[aria-label="Publish"]').click();
+
   fs.unlink(img_file, (err) => {
     console.log(err);
   });
