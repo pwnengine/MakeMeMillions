@@ -33,6 +33,39 @@
   border: solid;
 }
 
+.generic-container-outer {
+  height: 800px;
+  width: 32%;
+  min-width: 490px;
+  border-radius: 20px;
+  position: relative;
+  top: 0px;
+  left: 8%;
+
+  text-align: left;
+  overflow-y: hidden;
+
+  background-color: #ffff;
+}
+
+.generic-container-inner {
+  min-width: 340px;
+  height: 150%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  
+  background-color: #ffff;
+  
+  padding: 75px;
+  padding-top: 1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+
+  gap: 1em;
+}
+
 .marketplace-post-container-outer {
   height: 800px;
   width: 32%;
