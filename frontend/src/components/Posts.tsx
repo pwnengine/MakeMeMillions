@@ -10,7 +10,6 @@ const Posts = (p: props) => {
   return (
     <>
       <button className="update-cl-posts" onClick={() => {
-        console.log('hleloo');
         p.handle_update()
       }}>Update</button>
       {

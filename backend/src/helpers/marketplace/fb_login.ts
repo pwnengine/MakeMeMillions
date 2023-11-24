@@ -66,7 +66,7 @@ export const login = async (page: Page, fb_email: string, fb_pass: string): Prom
   });
 
   if(post_locator == null) {
-    console.log('null');
+    console.log('why null');
     return 1;
   } else {
     console.log('not null');
