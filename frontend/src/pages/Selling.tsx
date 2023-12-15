@@ -1,7 +1,9 @@
 import ShrinkableContainer from '../components/ShrinkableContainer'
 import { getDocs, collection } from 'firebase/firestore'
 import { db } from '../config/firebase'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import Posts from '../components/Posts';
+import { c_listing } from '../listing_class'
 
 interface i_listings {
   img_url: string;
@@ -36,20 +38,20 @@ const Selling = () => {
   // would also be nice to have some kind of notication component for ux purposes like a box that is green
   // and displays it has been posted to market place. an X button to close it would be a nice touch
   
-console.log(listings);
+console.log('active listings: ' + listings);
+  
+  const listings_class: c_listing[] = listings.map((val) => {
+    const list = new c_listing;
+    list.set_title = val.title;
+    list.set_img_url = val.img_url;
+    return list
+  });
 
+  
   return (
     <>
       <ShrinkableContainer heading="Active Listings" class_name="generic-container" container_width={1200} min_browser_width_before_shrink={1500}>
-        <div>
-          {listings.map((val) => {
-            return (
-              <div>
-                <p>{val.title}</p>
-              </div>
-            )
-          })}
-        </div>
+        <Posts data={listings_class} on_click={() => {}} handle_update={() => {}} />
       </ShrinkableContainer>
     </>
   )

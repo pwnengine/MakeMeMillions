@@ -5,6 +5,8 @@ import { useForm, FieldValues } from 'react-hook-form'
 import { c_listing } from '../listing_class';
 import { useQueryHook } from '../hooks/useQueryHook'
 import Axios from 'axios'
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../config/firebase'
 
 interface i_listings {
   img_url: string;
@@ -57,14 +59,15 @@ const Dashboard = () => {
 
     Axios.get(`http://localhost:8080/api/v1/fb/?email=${fb_email}&pass=${fb_pass}&index=${post_index}&img_url=${curr_img_url}&item_title=${item_title}&item_description=${item_description}&item_type=${item_type}&item_condition=${item_condition}&item_price=${item_price}`).then((res) => console.log(res))
     .catch((err) => console.log(err));
+
+    const listing_ref = collection(db, 'listings');
+    addDoc(listing_ref, { title: item_title, img_url: curr_img_url });
   };
 
   return (
     <>
       <div className="marketplace-post-container-outer">
         <h3 style={{marginLeft: '20px'}}>List With Marketplace</h3>
-        
-        
 
         <div className="marketplace-post-container-inner">
           
